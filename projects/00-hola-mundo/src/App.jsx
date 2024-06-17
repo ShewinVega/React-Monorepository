@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { TwitterFollowCard } from './TwitterFollowCard';
 
-function App() {
-  const [count, setCount] = useState(0)
+
+export function App() {
+
+  const format = (userName) => `@${userName}`;
+  // const formattedUserName = <span>@Dombuldor</span>;
+
+  const users = [
+    {
+      userName: 'minino',
+      name: 'LordCat',
+      isFollowing: true,
+      avatarUrl: "https://t3.ftcdn.net/jpg/06/28/87/16/360_F_628871677_osiZxakMxZXJ0fzJur30hJyo9IaEFKZ3.jpg" 
+    },
+    {
+      userName: 'androide17',
+      name: 'Elon Musk',
+      isFollowing: false,
+      avatarUrl: "https://hips.hearstapps.com/hmg-prod/images/musk-weed-1536332069.jpg?crop=0.502xw:1.00xh;0.356xw,0&resize=1200:*"
+    },
+    {
+      userName: 'androide18',
+      name: 'Elon Musk',
+      isFollowing: false,
+      avatarUrl: "https://hips.hearstapps.com/hmg-prod/images/musk-weed-1536332069.jpg?crop=0.502xw:1.00xh;0.356xw,0&resize=1200:*"
+    },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <section className='App'>
 
-export default App
+      {
+        users.map(({ userName, name, isFollowing, avatarUrl }) => (
+            <TwitterFollowCard  
+              key={userName}
+              formatUserName={format}
+              initialIsFollowing={isFollowing}
+              userName={userName} 
+              avatarUrl={avatarUrl}
+            > {name} </TwitterFollowCard>
+          ))
+      }
+    </section>
+  );
+}
